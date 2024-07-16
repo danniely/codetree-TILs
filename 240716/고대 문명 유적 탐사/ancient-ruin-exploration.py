@@ -42,7 +42,9 @@ def refill_prizes(grid, new_prizes):
     for x in range(n):
         for y in range(n-1, -1, -1):
             if grid[y][x] == -1:
-                grid[y][x] = new_prizes.popleft()
+                if len(new_prizes) > 0:
+                    pop_value = new_prizes.popleft()
+                    grid[y][x] = pop_value
 
 def deep_copy(grid):
     return copy.deepcopy(grid)
@@ -116,23 +118,44 @@ def run(grid_param, num_simulations, new_prizes: deque):
                 })
 
         best_option = find_the_best_option(max_candidates)
-        # print("best_option: ", best_option)
-        grid = best_option['grid']
+        best_grid = best_option['grid']
         current_prize = best_option['prize']
 
         if current_prize == 0:
             continue
+
+        grid = best_grid
         
         total_prize += current_prize
 
         # print("total_prize(first): ", total_prize)
+
+        # print("new_prizes: ", new_prizes)
+
+        # print("before refill")
+        # print_grid(best_grid)
         
         refill_prizes(grid, new_prizes)
+
+        # print("after refill")
+        # print_grid(best_grid)
+
         new_prize = obtain_prize(grid)
-        while new_prize > 0:
+ 
+        # print("after scavange")
+        # print_grid(best_grid)
+
+        while new_prize > 0 and len(new_prizes) >0:
             total_prize += new_prize
             refill_prizes(grid, new_prizes)
+
+            # print("after refill")
+            # print_grid(best_grid)
+
             new_prize = obtain_prize(grid)
+
+            # print("after scavange")
+            # print_grid(best_grid)       
         
         # print("total_prize(after): ", total_prize)
         prizes.append(total_prize)
