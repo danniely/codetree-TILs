@@ -3,6 +3,7 @@ arr = list(map(int, input().split(" ")))
 
 def bubble_sort(arr):    
     n = len(arr)
+    is_sorted = False
     while is_sorted == False:
         is_sorted = True
 
@@ -13,5 +14,7 @@ def bubble_sort(arr):
     
     return arr
 
-ans = " ".join(arr)
-print(ans)
+bubble_sort(arr)
+
+for elem in arr:
+    print(elem, end=" ")
