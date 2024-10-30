@@ -7,7 +7,11 @@ arr = list(map(int, input().strip().split(" ")))
 # prefix: -10 0 -4 0 1
 
 def max_sum_k_consecutive(arr, k):
-    prefix_sum = [0] + reduce(lambda acc, x: acc + [acc[-1]+x], arr[1:], [arr[0]])
+    # prefix_sum = [0] + reduce(lambda acc, x: acc + [acc[-1]+x], arr[1:], [arr[0]])
+    prefix_sum = [0]
+    for elem in arr:
+        prefix_sum.append(prefix_sum[-1]+elem)
+
     max_sum = -float('inf')
     for i in range(k-1,len(arr)):
         current_range_sum = prefix_sum[i]-prefix_sum[i-k]
