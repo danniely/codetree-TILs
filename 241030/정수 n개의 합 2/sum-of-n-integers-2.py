@@ -16,7 +16,7 @@ def max_sum_k_consecutive(arr, k):
         prefix_sum[i] = prefix_sum[i - 1] + arr[i - 1]
 
     max_sum = -float('inf')
-    for i in range(k-1,len(arr)+1):
+    for i in range(k-1,len(prefix_sum)):
         current_range_sum = prefix_sum[i]-prefix_sum[i-k]
         max_sum = max(max_sum, current_range_sum)
 
