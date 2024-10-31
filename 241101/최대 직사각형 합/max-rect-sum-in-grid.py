@@ -14,7 +14,7 @@ for y in range(n):
 # [0, 14, -877, -858]
 
 # print(*prefix_sum, sep="\n")
-max_sum = 0
+max_sum = -float('inf')
 for y_i in range(1, n+1):
     for x_i in range(1, n+1):
         for y_j in range(y_i, n+1):
